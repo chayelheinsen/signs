@@ -1,15 +1,15 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-class Home extends React.Component {
+class Login extends React.Component {
   render() {
     return (
       <div>
-        <p>Home</p>
-        <Link to='/login'>Login</Link>
+        <p>Login</p>
+        <Link to='/'>Home</Link>
       </div>
     )
   }
 }
 
-export default Home
+export default Login

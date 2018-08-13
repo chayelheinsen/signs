@@ -1,15 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-class Home extends React.Component {
+class NoMatch extends React.Component {
   render() {
     return (
       <div>
-        <p>Home</p>
-        <Link to='/login'>Login</Link>
+        <p>404</p>
       </div>
     )
   }
 }
 
-export default Home
+export default NoMatch

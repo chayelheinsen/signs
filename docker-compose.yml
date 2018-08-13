@@ -25,6 +25,7 @@ services:
       - 3000:3000
     links:
       - postgres:db
+      - redis
     entrypoint: /usr/src/app/development-entrypoint
     volumes:
       - .:/usr/src/app

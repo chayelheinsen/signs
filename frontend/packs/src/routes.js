@@ -1,14 +1,22 @@
 import React from 'react'
 import {
   BrowserRouter as Router,
-  Route
+  Route,
+  Switch
 } from 'react-router-dom'
-import Home from './components/home';
+
+import Home from './components/home'
+import Login from './components/login'
+import NoMatch from './components/no_match'
 
 const App = (props) => (
   <Router>
-    <Route exact path='/' component={Home} />
+    <Switch>
+      <Route exact path='/' component={Home} />
+      <Route path='/login' component={Login} />
+      <Route path="*" status={404} component={NoMatch}/>
+    </Switch>
   </Router>
 )
 
-export default App;
+export default App
