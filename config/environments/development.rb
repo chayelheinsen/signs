@@ -68,4 +68,5 @@ Rails.application.configure do
   end
 
   config.sass.inline_source_maps = true
+  config.webpacker.check_yarn_integrity = true
 end
