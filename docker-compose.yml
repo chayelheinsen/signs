@@ -18,12 +18,15 @@ services:
       # The password we'll use to access the databases:
       POSTGRES_PASSWORD: password
 
+  redis:
+      image: redis:latest
+
   web:
     build:
       context: .
       dockerfile: Dockerfile
     # The name our development image will use:
-    image: signs/development
+    image: chayel/signs
     command: rails server -b 0.0.0.0 -p 3000
     ports:
       # This will bind your port 3000 with the container's port 3000, so we can
