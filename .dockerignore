@@ -6,7 +6,7 @@
 *Dockerfile
 docker-compose*.yml
 *.env
-# development-entrypoint
+development-entrypoint
 .dockerignore
 
 # Ignore log files:
