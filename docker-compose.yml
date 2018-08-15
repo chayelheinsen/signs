@@ -5,8 +5,6 @@ volumes:
     driver: local
   app-gems:
     driver: local
-  webpacker:
-    driver: local
 
 services:
   postgres:
@@ -19,16 +17,6 @@ services:
   redis:
     image: redis:latest
 
-  webpacker:
-    build: .
-    env_file:
-      - '.env'
-    command: ./bin/webpack-dev-server --inline true
-    volumes:
-      - .:/usr/src/app
-    ports:
-      - 3035:3035
-
   backend:
     build: .
     image: chayel/signs
@@ -38,8 +26,7 @@ services:
     links:
       - postgres:db
       - redis
-      - webpacker
-    entrypoint: /usr/src/app/development-entrypoint
+    #entrypoint: /usr/src/app/development-entrypoint
     volumes:
       - .:/usr/src/app
       - app-gems:/usr/local/bundle

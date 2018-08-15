@@ -51,6 +51,11 @@ GEM
       io-like (~> 0.3.0)
     arel (9.0.0)
     ast (2.4.0)
+    axios_rails (0.7.0)
+    babel-source (5.8.35)
+    babel-transpiler (0.7.0)
+      babel-source (>= 4.0, < 6)
+      execjs (~> 2.0)
     bcrypt (3.1.12)
     better_errors (2.4.0)
       coderay (>= 1.0.0)
@@ -77,6 +82,7 @@ GEM
       nokogiri (~> 1.8)
     coderay (1.1.2)
     concurrent-ruby (1.0.5)
+    connection_pool (2.2.1)
     crass (1.0.4)
     debug_inspector (0.0.3)
     diff-lcs (1.3)
@@ -96,6 +102,8 @@ GEM
     ffi (1.9.25)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
+    httparty (0.16.2)
+      multi_xml (>= 0.5.2)
     i18n (1.1.0)
       concurrent-ruby (~> 1.0)
     io-like (0.3.0)
@@ -104,6 +112,7 @@ GEM
       addressable (~> 2.3)
     letter_opener (1.6.0)
       launchy (~> 2.2)
+    libv8 (3.16.14.19-x86_64-darwin-16)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -121,6 +130,7 @@ GEM
     mini_portile2 (2.3.0)
     minitest (5.11.3)
     msgpack (1.2.4)
+    multi_xml (0.6.0)
     nio4r (2.3.1)
     nokogiri (1.8.4)
       mini_portile2 (~> 2.3.0)
@@ -137,8 +147,6 @@ GEM
     public_suffix (3.0.2)
     puma (3.12.0)
     rack (2.0.5)
-    rack-proxy (0.6.3)
-      rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.2.1)
@@ -170,7 +178,14 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
+    react-rails (2.2.1)
+      babel-transpiler (>= 0.7.0)
+      connection_pool
+      execjs
+      railties (>= 3.2)
+      tilt
     redis (4.0.2)
+    ref (2.0.0)
     rspec-core (3.8.0)
       rspec-support (~> 3.8.0)
     rspec-expectations (3.8.1)
@@ -231,6 +246,9 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    therubyracer (0.12.3)
+      libv8 (~> 3.16.14.15)
+      ref
     thor (0.20.0)
     thread_safe (0.3.6)
     tilt (2.0.8)
@@ -244,10 +262,6 @@ GEM
       activemodel (>= 5.0)
       bindex (>= 0.4.0)
       railties (>= 5.0)
-    webpacker (3.2.1)
-      activesupport (>= 4.2)
-      rack-proxy (>= 0.6.1)
-      railties (>= 4.2)
     websocket-driver (0.7.0)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
@@ -259,6 +273,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
+  axios_rails (~> 0.7.0)
   bcrypt (~> 3.1.7)
   better_errors
   binding_of_caller
@@ -269,6 +284,7 @@ DEPENDENCIES
   dotenv-rails
   factory_bot_rails
   fast_jsonapi
+  httparty
   letter_opener
   listen (>= 3.0.5, < 3.2)
   pg (>= 0.18, < 2.0)
@@ -276,6 +292,7 @@ DEPENDENCIES
   pry-rails
   puma (~> 3.11)
   rails (~> 5.2.1)
+  react-rails
   redis (~> 4.0)
   rspec-rails
   rspec_junit_formatter
@@ -284,10 +301,10 @@ DEPENDENCIES
   selenium-webdriver
   spring
   spring-watcher-listen (~> 2.0.0)
+  therubyracer
   tzinfo-data
   uglifier (>= 1.3.0)
   web-console (>= 3.3.0)
-  webpacker
 
 RUBY VERSION
    ruby 2.5.1p57

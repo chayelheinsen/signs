@@ -5,16 +5,19 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "2.5.1"
 
+gem "axios_rails", "~> 0.7.0"
 gem "bcrypt", "~> 3.1.7"
 gem "bootsnap", ">= 1.1.0", require: false
 gem "fast_jsonapi"
+gem "httparty"
 gem "pg", ">= 0.18", "< 2.0"
 gem "puma", "~> 3.11"
 gem "rails", "~> 5.2.1"
+gem "react-rails"
 gem "redis", "~> 4.0"
 gem "sassc-rails"
+gem "therubyracer"
 gem "uglifier", ">= 1.3.0"
-gem "webpacker"
 
 group :development, :test do
   gem "annotate"
