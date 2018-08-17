@@ -9,14 +9,16 @@ gem "axios_rails", "~> 0.7.0"
 gem "bcrypt", "~> 3.1.7"
 gem "bootsnap", ">= 1.1.0", require: false
 gem "fast_jsonapi"
+gem "forerunner"
 gem "httparty"
+gem "materialize-sass", "~> 1.0.0.rc2"
 gem "pg", ">= 0.18", "< 2.0"
 gem "puma", "~> 3.11"
 gem "rails", "~> 5.2.1"
 gem "react-rails"
 gem "redis", "~> 4.0"
 gem "sassc-rails"
-gem "therubyracer"
+gem "mini_racer"
 gem "uglifier", ">= 1.3.0"
 
 group :development, :test do

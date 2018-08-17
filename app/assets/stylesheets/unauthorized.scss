@@ -1,0 +1,15 @@
+@import "materialize";
+@import "https://fonts.googleapis.com/icon?family=Material+Icons";
+@import "variables";
+@import "inputs";
+
+* {
+  font-family: 'Lato';
+}
+
+html, body {
+  background-color: $primaryBlack;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}

@@ -67,5 +67,6 @@ Rails.application.configure do
     config.logger = ActiveSupport::TaggedLogging.new(logger)
   end
 
-  config.sass.inline_source_maps = true
+  # config.sass.inline_source_maps = true
+  config.sass.inline_source_maps = false
 end
