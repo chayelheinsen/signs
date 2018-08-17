@@ -11,5 +11,7 @@ class CreateUser
     unless user.save
       context.fail!(errors: user.errors)
     end
+
+    context.user = user
   end
 end

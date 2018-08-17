@@ -10,9 +10,9 @@ class SessionsController < ApplicationController
 
     if user&.authenticate(login_params[:password])
       log_in(user)
+      render json: { status: "Success" }
     else
-      flash[:error] = "Email/password combination is incorrect"
-      redirect_to login_path
+      render json: { error: "Email/password combination is incorrect" }, status: 422
     end
   end
 
@@ -28,10 +28,6 @@ class SessionsController < ApplicationController
   end
 
   def find_user
-    User.find_by(email: login_params[:email].downcase)
-  end
-
-  def direct_to_dashboard
-    redirect_to dashboard_path
+    User.find_by(email: login_params[:email])
   end
 end

@@ -15,7 +15,20 @@
  */
 
 @import "materialize";
+@import "variables";
+@import "inputs";
+@import "navbar/base";
 
 * {
-  font-family: 'Lato';
+  font-family: 'Roboto';
+  color: $white;
+}
+
+html, body {
+  background-color: $primaryBlack;
+  margin: 0;
+}
+
+.full-width {
+  width: 100%;
 }

@@ -6,7 +6,7 @@ module SessionsHelper
   end
 
   def log_out
-    session.delete(:ser_id)
+    session.delete(:user_id)
     @current_user = nil
   end
 

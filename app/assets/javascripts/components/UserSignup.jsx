@@ -57,7 +57,9 @@ class UserSignup extends React.Component {
       authenticity_token: authenticityToken
     }
 
-    axios.post("/users", payload).catch((error) => {
+    axios.post("/users", payload).then(() => {
+      window.location.replace("/dashboard")
+    }).catch((error) => {
       const data = error.data
       const emailError = data.email
 
@@ -92,9 +94,9 @@ class UserSignup extends React.Component {
     }
 
     return (
-      <div>
+      <div className="container">
         <div className="row">
-          <form className="col s12" onSubmit={this.onSubmit}>
+          <form className="col s6 offset-s3" onSubmit={this.onSubmit}>
             <div className="row">
               <div className="input-field col s12">
                 <input id="email" type="email" className={emailClass}
@@ -103,9 +105,7 @@ class UserSignup extends React.Component {
                        onChange={this.fieldChanged}
                 />
                 <label htmlFor="email">Email</label>
-                <span className="helper-text" data-error={emailError} data-success="">
-                  At least 8 characters
-                </span>
+                <span className="helper-text" data-error={emailError} data-success="" />
               </div>
             </div>
             <div className="row">
@@ -140,6 +140,12 @@ class UserSignup extends React.Component {
               Sign Up
             </button>
           </form>
+        </div>
+        <div>
+          <p className="center-align">Already have an account?</p>
+          <div className="center-align">
+            <a href="/login" className="btn waves-effect waves-light">Login</a>
+          </div>
         </div>
       </div>
     )

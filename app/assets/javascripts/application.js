@@ -16,5 +16,11 @@
 //= require react
 //= require react_ujs
 //= require components
+//= require jquery
 //= require materialize
 //= require_tree .
+
+$(document).ready(function(){
+  $(".sidenav").sidenav();
+  $(".dropdown-trigger").dropdown();
+});
