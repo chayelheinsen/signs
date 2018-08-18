@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "type",
+    "region",
+    "server",
+    "favorite"
+  ],
+  "properties": {
+    "id": { "type": "integer" },
+    "name": { "type": "string" },
+    "type": { "type": "string" },
+    "region": { "type": "string" },
+    "server": { "type": "string" },
+    "favorite": { "type": "boolean" }
+  },
+  "additionalProperties": true
+}

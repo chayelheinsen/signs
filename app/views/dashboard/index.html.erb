@@ -1,1 +1,6 @@
-<%= react_component("Dashboard", current_user: serialized_user[:data]) %>
+<%= react_component(
+        "Dashboard",
+        currentUser: serialized_user[:data],
+        authenticityToken: form_authenticity_token,
+        apiAuthToken: current_user.new_api_token,
+    ) %>
