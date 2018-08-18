@@ -21,10 +21,21 @@ class NewAppModal extends React.Component {
 
   validateForm() {
     const { appName, region } = this.state
+    const appNameRegex = /^([a-z0-9]+[-]*[a-z0-9]+[-]*[a-z0-9]+)$/m
 
-    const valid = appName.length > 0 && region.length > 0
+    const nameValid = this.appNameLengthValid() && appNameRegex.test(appName)
+    const regionValid = region.length > 0
+    const valid = nameValid && regionValid
 
-    this.setState({ isFormValid: valid, appNameError: "" })
+    const appNameError = nameValid ? "" : "This name should only contain lowercase letters, numbers, and dashes and be at least 3 characters long."
+
+    this.setState({ isFormValid: valid, appNameError })
+  }
+
+  appNameLengthValid() {
+    const { appName } = this.state
+
+    return appName.length >= 3 && appName.length <= 50
   }
 
   onSubmit(event) {
@@ -46,15 +57,18 @@ class NewAppModal extends React.Component {
       }
     }
 
-    axios.post("/api/app", payload, options).then(() => {
+    axios.post("/api/apps", payload, options).then(() => {
       window.location.replace("/dashboard")
     }).catch((error) => {
-      const data = error.data
-      const nameError = data.name
+      const data = error.data.errors
 
-      if (nameError) {
-        this.setState({appNameError: nameError[0]})
+      let nameError = null
+
+      if (data.name) {
+        nameError = data.name
       }
+
+      this.setState({appNameError: nameError[0]})
     })
   }
 
@@ -62,18 +76,16 @@ class NewAppModal extends React.Component {
     const { appName, region, isFormValid, appNameError } = this.state
 
     const isAppNameInvalid = appNameError !== ""
-    let appNameClass = "validate"
+    let appNameClass = this.appNameLengthValid() ? "valid" : ""
 
     if (isAppNameInvalid) {
-      appNameClass = "validate invalid"
+      appNameClass = "invalid"
     }
 
     return (
       <div id="new-app-modal" className="modal">
         <div className="modal-content">
-          <h4>Create a new app</h4>
-          <p>A bunch of text</p>
-
+          <h4>Create New App</h4>
           <div className="row">
             <form className="col s6 offset-s3" onSubmit={this.onSubmit}>
               <div className="row">
@@ -84,6 +96,7 @@ class NewAppModal extends React.Component {
                          onChange={this.fieldChanged}
                   />
                   <label htmlFor="app-name-field">App name</label>
+                  <span className="helper-text" data-error={appNameError} data-success="" />
                 </div>
                 <div className="input-field col s12">
                   <select value={region} name="region" onChange={this.fieldChanged}>

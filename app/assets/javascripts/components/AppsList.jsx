@@ -7,35 +7,11 @@ class AppsList extends React.Component {
   }
 
   createApp(app) {
-    return <AppForList app={app} key={app.name}/>
+    return <AppForList app={app} key={app.attributes.name}/>
   }
 
   render() {
-    const { currentUser, apiAuthToken } = this.props
-
-    const apps = [
-      {
-        name: "Orlando Magic",
-        type: "Ruby",
-        region: "United States",
-        server: "t2.large",
-        favorite: false
-      },
-      {
-        name: "Signs",
-        type: "Node",
-        region: "United States",
-        server: "t2.xlarge",
-        favorite: true
-      },
-      {
-        name: "Dolent Caramel",
-        type: "Node",
-        region: "United States",
-        server: "t2.micro",
-        favorite: true
-      }
-    ]
+    const { currentUser, apiAuthToken, apps } = this.props
 
     return (
       <div className="apps-list-container">
@@ -45,9 +21,8 @@ class AppsList extends React.Component {
           </a>
         </div>
         <NewAppModal currentUser={currentUser} apiAuthToken={apiAuthToken} />
-        {/*{TODO: Refactor this to use apps from props}*/}
         <div className="app-list">
-          {apps.map(this.createApp)}
+          {apps.sort((a, b) => a.attributes.name > b.attributes.name).map(this.createApp)}
         </div>
       </div>
     )
