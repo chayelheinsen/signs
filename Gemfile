@@ -13,6 +13,7 @@ gem "forerunner"
 gem "httparty"
 gem "interactor-rails"
 gem "jquery-rails", ">= 4.0"
+gem "jwt"
 gem "materialize-sass", "~> 1.0.0.rc2"
 gem "mini_racer"
 gem "pg", ">= 0.18", "< 2.0"
@@ -49,7 +50,10 @@ end
 group :test do
   gem "capybara", ">= 2.15"
   gem "chromedriver-helper"
+  gem "json_matchers"
   gem "selenium-webdriver"
+  gem "sinatra", "~> 2.0"
+  gem "webmock"
 end
 
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]

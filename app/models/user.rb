@@ -14,11 +14,18 @@
 class User < ApplicationRecord
   has_secure_password
 
+  has_many :user_apps
+  has_many :apps, through: :user_apps
+
   VALID_EMAIL_REGEX = /.+@.+/i
 
   validates :email, presence: true, uniqueness: true,
                     case_sensitive: false, format: VALID_EMAIL_REGEX
   validates :password, confirmation: true, length: { minimum: 8 }, if: :validate_password?
+
+  def new_api_token
+    APIToken.new(user: self).to_jwt
+  end
 
   private
 

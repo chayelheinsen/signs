@@ -11,6 +11,8 @@ class AppsList extends React.Component {
   }
 
   render() {
+    const { currentUser, apiAuthToken } = this.props
+
     const apps = [
       {
         name: "Orlando Magic",
@@ -38,10 +40,11 @@ class AppsList extends React.Component {
     return (
       <div className="apps-list-container">
         <div className="header valign-wrapper row">
-          <a className="waves-effect waves-light btn nav-red col s1 offset-s11">
+          <a className="waves-effect waves-light btn nav-red col s1 offset-s11 modal-trigger" href="#new-app-modal">
             <i className="material-icons right">add</i>New
           </a>
         </div>
+        <NewAppModal currentUser={currentUser} apiAuthToken={apiAuthToken} />
         {/*{TODO: Refactor this to use apps from props}*/}
         <div className="app-list">
           {apps.map(this.createApp)}

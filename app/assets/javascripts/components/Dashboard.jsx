@@ -7,10 +7,12 @@ class Dashboard extends React.Component {
   }
 
   render() {
+    const { currentUser, authenticityToken, apiAuthToken } = this.props
+
     return (
       <div>
-        <Navbar currentUser={this.props.currentUser} />
-        <AppsList currentUser={this.props.currentUser} />
+        <Navbar currentUser={currentUser} />
+        <AppsList currentUser={currentUser} authenticityToken={authenticityToken} apiAuthToken={apiAuthToken} />
       </div>
     )
   }
