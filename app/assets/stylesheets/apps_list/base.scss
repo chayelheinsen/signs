@@ -2,16 +2,20 @@
 @import "variables";
 
 .apps-list-container {
-  .header {
-    background-color: $primaryBlack;
-    height: 60px;
-    border-bottom: 1px solid #424242;
-    padding: 0 150px;
+  .row {
+    margin: 10px auto;
+
+    .header {
+      background-color: $primaryBlack;
+      height: 60px;
+      padding-right: 30px;
+      display: flex;
+      justify-content: flex-end;
+    }
   }
 
   .app-list {
     background-color: $primaryBlack;
-    padding-top: 20px;
 
     .app-container {
       height: 50px;

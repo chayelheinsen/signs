@@ -15,10 +15,12 @@ class AppsList extends React.Component {
 
     return (
       <div className="apps-list-container">
-        <div className="header valign-wrapper row">
-          <a className="waves-effect waves-light btn nav-red col s1 offset-s11 modal-trigger" href="#new-app-modal">
-            <i className="material-icons right">add</i>New
-          </a>
+        <div className="row">
+          <div className="header valign-wrapper col s6 offset-s3">
+            <a className="waves-effect waves-light btn nav-red modal-trigger" href="#new-app-modal">
+              <i className="material-icons right">add</i>New
+            </a>
+          </div>
         </div>
         <NewAppModal currentUser={currentUser} apiAuthToken={apiAuthToken} />
         <div className="app-list">
