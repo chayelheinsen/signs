@@ -9,9 +9,9 @@ module API
         render(
           json: AppSerializer.new(
             result.app,
-            params: { current_user_id: current_user.id }
+            params: { current_user_id: current_user.id },
           ).serializable_hash,
-          status: 201
+          status: 201,
         )
       else
         render_errors(result.message)

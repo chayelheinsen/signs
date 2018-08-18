@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AppSerializer
   include FastJsonapi::ObjectSerializer
   attributes :name, :type, :region, :server, :favorite, :owner_id
