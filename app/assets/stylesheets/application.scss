@@ -18,6 +18,7 @@
 @import "variables";
 @import "inputs";
 @import "navbar/base";
+@import "apps_list/base";
 
 * {
   font-family: 'Roboto';
@@ -31,4 +32,12 @@ html, body {
 
 .full-width {
   width: 100%;
+}
+
+.nav-red {
+  background-color: $navRed;
+}
+
+.nav-red-text {
+  color: $navRed;
 }

@@ -1,0 +1,33 @@
+@import "materialize";
+
+.apps-list-container {
+  .header {
+    background-color: #2f2f2f;
+    height: 60px;
+    border-bottom: 1px solid #424242;
+    padding: 0 150px;
+  }
+
+  .app-list {
+    background-color: #2f2f2f;
+    padding-top: 20px;
+
+    .app-container {
+      height: 50px;
+
+      &:not(:last-child) {
+        border-bottom: 1px solid #525252;
+      }
+
+      .app {
+        display: flex;
+        justify-content: space-between;
+
+        .details {
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+  }
+}
