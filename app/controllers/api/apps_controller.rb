@@ -14,7 +14,7 @@ module API
           status: 201,
         )
       else
-        render_errors(result.message)
+        render_errors(result.errors)
       end
     end
 

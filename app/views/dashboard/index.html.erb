@@ -3,4 +3,5 @@
         currentUser: serialized_user[:data],
         authenticityToken: form_authenticity_token,
         apiAuthToken: current_user.new_api_token,
+        apps: apps[:data],
     ) %>

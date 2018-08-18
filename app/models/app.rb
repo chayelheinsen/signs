@@ -22,5 +22,16 @@ class App < ApplicationRecord
   has_many :users, through: :user_apps
   belongs_to :owner, class_name: "User", foreign_key: "owner_id"
 
-  validates :name, presence: true, uniqueness: { case_sensitive: false }
+  VALID_NAME_REGEX = /\A([a-z0-9]+[-]*[a-z0-9]+[-]*[a-z0-9]+)\z/i
+
+  validates :name, presence: true, format: VALID_NAME_REGEX, uniqueness: { case_sensitive: false },
+                   length: { minimum: 3, maximum: 50 }
+
+  before_save :downcase_fields
+
+  scope :ordered, -> { order(name: :desc) }
+
+  def downcase_fields
+    self.name.downcase!
+  end
 end

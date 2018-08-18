@@ -37,6 +37,21 @@ RSpec.describe App, type: :model do
         app = build_and_validate(:app, name: "my-cool-app")
         expect(app.errors).to include(:name)
       end
+
+      it "doesn't allow underscores" do
+        app = build_and_validate(:app, name: "testing_name")
+        expect(app.errors).to include(:name)
+      end
+
+      it "doesn't allow hyphens at the beginning" do
+        app = build_and_validate(:app, name: "-testing-name")
+        expect(app.errors).to include(:name)
+      end
+
+      it "doesn't allow hyphens at the end" do
+        app = build_and_validate(:app, name: "testing-name-")
+        expect(app.errors).to include(:name)
+      end
     end
   end
 end
