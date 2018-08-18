@@ -21,7 +21,7 @@ module Auth
   private
 
   def auth_token
-    @auth_token ||= APIToken.decode(http_auth_token)
+    @auth_token ||= APIToken.decode(token: http_auth_token)
   end
 
   def find_current_user_by_auth_token

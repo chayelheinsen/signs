@@ -14,7 +14,7 @@ RSpec.describe "Apps", type: :request do
 
     context "with valid attributes" do
       it "returns the app" do
-        expect(response).to eq(201)
+        expect(response.status).to eq(201)
         expect(response).to match_response_schema("app", strict: false)
       end
     end

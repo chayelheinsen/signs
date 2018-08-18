@@ -11,4 +11,8 @@ Rails.application.routes.draw do
 
   resources :dashboard, only: %i[index]
   resources :users, only: %i[new create]
+
+  namespace :api do
+    resources :apps, only: %i[create]
+  end
 end

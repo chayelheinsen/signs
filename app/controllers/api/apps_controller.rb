@@ -17,11 +17,11 @@ module API
         render_errors(result.message)
       end
     end
-  end
 
-  private
+    private
 
-  def app_params
-    params.require(:app).permit(:name, :region)
+    def app_params
+      params.require(:app).permit(:name, :region)
+    end
   end
 end
