@@ -4,7 +4,7 @@ jobs:
     parallelism: 4
     # working_directory: ~/user/src/app
     docker:
-      - image: chayel/signs
+      - image: circleci/ruby:2.5.1
         environment:
           RAILS_ENV: test
           PGUSER: circleci
