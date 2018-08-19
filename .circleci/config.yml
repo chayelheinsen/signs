@@ -12,7 +12,7 @@ jobs:
 #        environment:
 #          POSTGRES_USER: circleci
     steps:
-      - checkout
+#      - checkout
 
 #      # Restore bundle cache
 #      - restore_cache:
