@@ -13,7 +13,6 @@ jobs:
         environment:
           POSTGRES_USER: circleci
           POSTGRES_PASSWORD: password
-          POSTGRES_USER: your-app-name
           POSTGRES_DB: signs_test
     steps:
       - checkout
