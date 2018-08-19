@@ -6,6 +6,8 @@ RSpec.describe "Apps", type: :request do
   let(:user) { create(:user) }
   let(:app_params) { attributes_for(:app) }
   let(:headers) { auth_for(user) }
+  let(:app_object) { create(:app, users: [user]) }
+  let(:app_id) { app_object.id }
 
   describe "POST /api/apps" do
     before do
@@ -29,10 +31,8 @@ RSpec.describe "Apps", type: :request do
   end
 
   describe "PATCH /api/apps/:id" do
-    let(:app) { create(:app, users: [user]) }
-
     before do
-      patch "/api/apps/#{app.id}", params: { app: app_params }, headers: headers
+      patch "/api/apps/#{app_id}", params: { app: app_params }, headers: headers
     end
 
     context "with a valid user" do
@@ -43,15 +43,16 @@ RSpec.describe "Apps", type: :request do
     end
 
     context "with an invalid user" do
-      let(:app) { create(:app) }
+      let(:app_object) { create(:app) }
 
       it "returns an error" do
-        expect(response.status).to eq(200)
-        expect(response).to match_response_schema("app", strict: false)
+        expect(response.status).to eq(422)
       end
     end
 
     context "when the app doesn't exist" do
+      let(:app_id) { 0 }
+
       it "returns an error" do
         expect(response.status).to eq(404)
       end

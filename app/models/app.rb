@@ -32,6 +32,6 @@ class App < ApplicationRecord
   scope :ordered, -> { order(name: :desc) }
 
   def downcase_fields
-    self.name.downcase!
+    name.downcase!
   end
 end

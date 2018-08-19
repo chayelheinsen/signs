@@ -19,7 +19,11 @@ module API
     end
 
     def update
-      result = UpdateApp.call(id: params[:id], app_params: app_update_params, current_user: current_user)
+      result = UpdateApp.call(
+        id: params[:id],
+        app_params: app_update_params,
+        current_user: current_user,
+      )
 
       if result.success?
         render(
@@ -27,7 +31,7 @@ module API
             result.app,
             params: { current_user_id: current_user.id },
           ).serializable_hash,
-          status: 201,
+          status: 200,
         )
       else
         render_errors(result.errors)
