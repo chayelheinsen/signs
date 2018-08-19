@@ -28,9 +28,20 @@
         display: flex;
         justify-content: space-between;
 
+        .title {
+          span {
+            font-weight: 300;
+          }
+        }
+
         .details {
           display: flex;
           align-items: center;
+
+          span {
+            font-weight: 300;
+            font-size: 14px;
+          }
         }
       }
     }

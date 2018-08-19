@@ -27,4 +27,42 @@ RSpec.describe "Apps", type: :request do
       end
     end
   end
+
+  describe "PATCH /api/apps/:id" do
+    let(:app) { create(:app, users: [user]) }
+
+    before do
+      patch "/api/apps/#{app.id}", params: { app: app_params }, headers: headers
+    end
+
+    context "with a valid user" do
+      it "updates the app and returns it" do
+        expect(response.status).to eq(200)
+        expect(response).to match_response_schema("app", strict: false)
+      end
+    end
+
+    context "with an invalid user" do
+      let(:app) { create(:app) }
+
+      it "returns an error" do
+        expect(response.status).to eq(200)
+        expect(response).to match_response_schema("app", strict: false)
+      end
+    end
+
+    context "when the app doesn't exist" do
+      it "returns an error" do
+        expect(response.status).to eq(404)
+      end
+    end
+
+    context "when not given a valid token" do
+      let(:headers) { bad_auth_header }
+
+      it "renders an error" do
+        expect(response.status).to eq(401)
+      end
+    end
+  end
 end

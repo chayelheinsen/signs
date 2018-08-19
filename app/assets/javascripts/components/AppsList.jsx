@@ -7,7 +7,7 @@ class AppsList extends React.Component {
   }
 
   createApp(app) {
-    return <AppForList app={app} key={app.attributes.name}/>
+    return <AppForList app={app} apiAuthToken={this.props.apiAuthToken} key={app.attributes.name} />
   }
 
   render() {
@@ -24,7 +24,7 @@ class AppsList extends React.Component {
         </div>
         <NewAppModal currentUser={currentUser} apiAuthToken={apiAuthToken} />
         <div className="app-list">
-          {apps.sort((a, b) => a.attributes.name > b.attributes.name).map(this.createApp)}
+          {apps.sort((a, b) => a.attributes.name > b.attributes.name).map((app) => this.createApp(app))}
         </div>
       </div>
     )

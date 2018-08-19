@@ -18,10 +18,30 @@ module API
       end
     end
 
+    def update
+      result = UpdateApp.call(id: params[:id], app_params: app_update_params, current_user: current_user)
+
+      if result.success?
+        render(
+          json: AppSerializer.new(
+            result.app,
+            params: { current_user_id: current_user.id },
+          ).serializable_hash,
+          status: 201,
+        )
+      else
+        render_errors(result.errors)
+      end
+    end
+
     private
 
     def app_params
       params.require(:app).permit(:name, :region)
+    end
+
+    def app_update_params
+      params.require(:app).permit(:name, :favorite)
     end
   end
 end
