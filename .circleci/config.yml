@@ -48,6 +48,8 @@ jobs:
             chmod +x ~/docker-compose
             sudo mv ~/docker-compose /usr/local/bin/docker-compose
 
+      - setup_remote_docker
+
       # Run rspec in parallel
       - run: |
           docker-compose run backend rspec --profile 10 \
