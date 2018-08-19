@@ -40,6 +40,14 @@ jobs:
 #        name: Wait for db
 #        command: dockerize -wait tcp://localhost:5432 -timeout 1m
 
+      # Install Docker Compose
+      - run:
+          name: Install Docker Compose
+          command: |
+            curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
+            chmod +x ~/docker-compose
+            sudo mv ~/docker-compose /usr/local/bin/docker-compose
+
       # Run rspec in parallel
       - run: |
           docker-compose run backend rspec --profile 10 \
