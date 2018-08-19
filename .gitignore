@@ -35,3 +35,4 @@ yarn-error.log*
 .yarn-integrity
 .bash_history
 .pry_history
+.viminfo
