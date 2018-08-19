@@ -52,7 +52,7 @@ group :test do
   gem "chromedriver-helper"
   gem "json_matchers"
   gem "selenium-webdriver"
-  gem "sinatra", "~> 2.0"
+  gem "sinatra", "~> 2.0.2"
   gem "webmock"
 end
 

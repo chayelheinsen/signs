@@ -157,7 +157,7 @@ GEM
     minitest (5.11.3)
     msgpack (1.2.4)
     multi_xml (0.6.0)
-    mustermann (1.0.2)
+    mustermann (1.0.3)
     nio4r (2.3.1)
     nokogiri (1.8.4)
       mini_portile2 (~> 2.3.0)
@@ -174,7 +174,7 @@ GEM
     public_suffix (3.0.2)
     puma (3.12.0)
     rack (2.0.5)
-    rack-protection (2.0.1)
+    rack-protection (2.0.3)
       rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -263,10 +263,10 @@ GEM
     selenium-webdriver (3.14.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.2)
-    sinatra (2.0.1)
+    sinatra (2.0.3)
       mustermann (~> 1.0)
       rack (~> 2.0)
-      rack-protection (= 2.0.1)
+      rack-protection (= 2.0.3)
       tilt (~> 2.0)
     spring (2.0.2)
       activesupport (>= 4.2)
@@ -342,7 +342,7 @@ DEPENDENCIES
   rubocop
   sassc-rails
   selenium-webdriver
-  sinatra (~> 2.0)
+  sinatra (~> 2.0.2)
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data
