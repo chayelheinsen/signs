@@ -22,7 +22,7 @@ class App < ApplicationRecord
   has_many :users, through: :user_apps
   belongs_to :owner, class_name: "User", foreign_key: "owner_id"
 
-  VALID_NAME_REGEX = /\A([a-z0-9]+[-]*[a-z0-9]+[-]*[a-z0-9]+)\z/i
+  VALID_NAME_REGEX = /\A[a-z]([-a-z0-9]*[a-z0-9])?\z/im
 
   validates :name, presence: true, format: VALID_NAME_REGEX, uniqueness: { case_sensitive: false },
                    length: { minimum: 3, maximum: 50 }

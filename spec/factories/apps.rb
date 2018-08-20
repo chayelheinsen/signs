@@ -17,7 +17,7 @@
 
 FactoryBot.define do
   factory :app do
-    name { SecureRandom.hex }
+    name { "a-#{SecureRandom.hex}" }
     type "Ruby"
     region "United States"
     server "t2.micro"

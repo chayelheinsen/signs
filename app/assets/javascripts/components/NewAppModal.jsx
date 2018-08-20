@@ -21,7 +21,7 @@ class NewAppModal extends React.Component {
 
   validateForm() {
     const { appName, region } = this.state
-    const appNameRegex = /^([a-z0-9]+[-]*[a-z0-9]+[-]*[a-z0-9]+)$/m
+    const appNameRegex = /^[a-z]([-a-z0-9]*[a-z0-9])?$/m
 
     const nameValid = this.appNameLengthValid() && appNameRegex.test(appName)
     const regionValid = region.length > 0
