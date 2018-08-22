@@ -6,6 +6,7 @@ class UserSignup extends React.Component {
       email: "",
       password: "",
       passwordConfirmation: "",
+      herokuToken: "",
       emailError: "",
       isFormValid: false
     }
@@ -21,9 +22,10 @@ class UserSignup extends React.Component {
   }
 
   validateForm() {
-    const { email } = this.state
+    const { email, herokuToken } = this.state
 
     let valid = email.length > 0 &&
+                herokuToken.length > 0 &&
                 this.isPasswordValid() &&
                 this.isPasswordConfirmationValid()
 
@@ -45,14 +47,15 @@ class UserSignup extends React.Component {
   onSubmit(event) {
     event.preventDefault()
 
-    const { email, password, passwordConfirmation } = this.state
+    const { email, password, passwordConfirmation, herokuToken } = this.state
     const { authenticityToken } = this.props
 
     const payload = {
       user: {
         email,
         password,
-        password_confirmation: passwordConfirmation
+        password_confirmation: passwordConfirmation,
+        heroku_token: herokuToken
       },
       authenticity_token: authenticityToken
     }
@@ -70,7 +73,7 @@ class UserSignup extends React.Component {
   }
 
   render() {
-    const { email, password, passwordConfirmation, isFormValid, emailError } = this.state
+    const { email, password, passwordConfirmation, herokuToken, isFormValid, emailError } = this.state
 
     const isEmailInvalid = emailError !== ""
     let emailClass = "validate"
@@ -116,9 +119,7 @@ class UserSignup extends React.Component {
                        onChange={this.fieldChanged}
                 />
                 <label htmlFor="password">Password</label>
-                <span className="helper-text" data-error="Not at least 8 characters" data-success="">
-                  At least 8 characters
-                </span>
+                <span className="helper-text" data-error="Not at least 8 characters" data-success="" />
               </div>
               <div className="input-field col s12">
                 <input id="password-confirmation" type="password" className={passwordConfirmationClass}
@@ -127,9 +128,25 @@ class UserSignup extends React.Component {
                        onChange={this.fieldChanged}
                 />
                 <label htmlFor="password-confirmation">Confirm Password</label>
-                <span className="helper-text" data-error="Doesn't match password" data-success="">
-                  At least 8 characters
-                </span>
+                <span className="helper-text" data-error="Doesn't match password" data-success="" />
+              </div>
+              <div className="input-field col s12">
+                <input id="heroku-token" type="text" className="validate"
+                       name="herokuToken"
+                       value={herokuToken}
+                       onChange={this.fieldChanged}
+                />
+                <label htmlFor="heroku-token">Heroku Token</label>
+                <pre className="prettyprint">
+                  <code className="language-bash">
+                    # How to get a Heroku Token?
+                    <br />
+                    <br />
+                    $ heroku plugins:install heroku-cli-oauth
+                    <br />
+                    $ heroku authorizations:create -d "Codename Signs Token"
+                  </code>
+                </pre>
               </div>
             </div>
             <button className="full-width btn waves-effect waves-light"

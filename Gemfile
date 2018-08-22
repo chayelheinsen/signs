@@ -5,6 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "2.5.1"
 
+gem "attr_encrypted", "~> 3.0.0"
 gem "axios_rails", "~> 0.7.0"
 gem "bcrypt", "~> 3.1.7"
 gem "bootsnap", ">= 1.1.0", require: false
@@ -17,6 +18,7 @@ gem "jwt"
 gem "materialize-sass", "~> 1.0.0.rc2"
 gem "mini_racer"
 gem "pg", ">= 0.18", "< 2.0"
+gem "platform-api"
 gem "puma", "~> 3.11"
 gem "rails", "~> 5.2.1"
 gem "react-rails"

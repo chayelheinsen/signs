@@ -30,4 +30,9 @@ After installing Docker
 This app uses an `.env` file for development environment variable insertion.
 An `.env.example` file has been included for convenience, and should be copied for customization.
 All of the required variables can be found in [.env.example](/.env.example).
+Most of the variables are pretty straight forward except for these:
 
+ Key | Description
+-----|-------------
+ SECURE_FIELD_KEY | A 256 bit string to use as a key for encrypted fields. You can generate a this key with `ruby -e "require 'securerandom'; puts SecureRandom.hex(16)"`. Encrypted fields are: `User#heroku_token`.
+ 

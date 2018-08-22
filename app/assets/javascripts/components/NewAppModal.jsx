@@ -3,6 +3,7 @@ class NewAppModal extends React.Component {
     super(props)
 
     this.state = {
+      herokuApps: [],
       appName: "",
       region: "",
       appNameError: "",
@@ -10,7 +11,76 @@ class NewAppModal extends React.Component {
     }
 
     this.fieldChanged = this.fieldChanged.bind(this)
-    this.onSubmit = this.onSubmit.bind(this)
+    this.newAppOnSubmit = this.newAppOnSubmit.bind(this)
+    this.chooseApp = this.chooseApp.bind(this)
+  }
+
+  componentDidMount() {
+    const { apiAuthToken } = this.props
+
+    const options = {
+      headers: {
+        "Authorization": `Bearer ${apiAuthToken}`
+      }
+    }
+
+    remote.herokuApps().then((response) => {
+      console.log(response)
+      this.setState({ herokuApps: response.data })
+    }).catch((error) => {
+      console.log(error)
+    })
+
+    // axios.get("/api/apps/heroku", options).then((response) => {
+    //   console.log(response)
+    //   this.setState({ herokuApps: response.data })
+    // }).catch((error) => {
+    //   console.log(error)
+    // })
+  }
+
+  createDeployForm() {
+    const { appName, region, isFormValid, appNameError } = this.state
+
+    const isAppNameInvalid = appNameError !== ""
+    let appNameClass = this.appNameLengthValid() ? "valid" : ""
+
+    if (isAppNameInvalid) {
+      appNameClass = "invalid"
+    }
+
+    return (
+      <div className="row">
+        <form className="col s6 offset-s3" onSubmit={this.newAppOnSubmit}>
+          <div className="row">
+            <div className="input-field col s12">
+              <input id="app-name-field" type="text" className={appNameClass}
+                     name="appName"
+                     value={appName}
+                     onChange={this.fieldChanged}
+              />
+              <label htmlFor="app-name-field">App name</label>
+              <span className="helper-text" data-error={appNameError} data-success="" />
+            </div>
+            <div className="input-field col s12">
+              <select value={region} name="region" onChange={this.fieldChanged}>
+                <option value="" disabled>Choose a region</option>
+                <option value="United States">United States</option>
+                <option value="Europe">Europe</option>
+              </select>
+              <label>Region</label>
+            </div>
+            <button className="full-width btn waves-effect waves-light"
+                    type="submit"
+                    name="action"
+                    disabled={!isFormValid}
+            >
+              Create app
+            </button>
+          </div>
+        </form>
+      </div>
+    )
   }
 
   fieldChanged(event) {
@@ -38,7 +108,7 @@ class NewAppModal extends React.Component {
     return appName.length >= 3 && appName.length <= 50
   }
 
-  onSubmit(event) {
+  newAppOnSubmit(event) {
     event.preventDefault()
 
     const { appName, region } = this.state
@@ -72,51 +142,67 @@ class NewAppModal extends React.Component {
     })
   }
 
-  render() {
-    const { appName, region, isFormValid, appNameError } = this.state
+  createConnectForm() {
+    const { herokuApps } = this.state
 
-    const isAppNameInvalid = appNameError !== ""
-    let appNameClass = this.appNameLengthValid() ? "valid" : ""
+    return (
+      <div className="heroku-apps row">
+        {herokuApps.map((app) => {
+          return (
+            <button className="col s6 offset-s3 app valign-wrapper heroku-app waves-effect waves-light btn" name={app.id} key={app.id} onClick={this.chooseApp}>
+              <div className="title">
+                <span>{app.name}</span>
+              </div>
+              <div className="details">
+                {app.buildpack_provided_description}
+              </div>
+            </button>
+          )
+        })}
+      </div>
+    )
+  }
 
-    if (isAppNameInvalid) {
-      appNameClass = "invalid"
+  chooseApp(event) {
+    const appID = event.target.name
+    const options = {
+      headers: {
+        "Authorization": `Bearer ${apiAuthToken}`
+      }
+    }
+    const payload = {
+      app: {
+        id: appID
+      }
     }
 
+    axios.post("/api/apps/connect", payload, options).then((response) = {
+
+    }).catch((error) => {
+
+    })
+  }
+
+  render() {
     return (
       <div id="new-app-modal" className="modal">
         <div className="modal-content">
           <h4>Create New App</h4>
-          <div className="row">
-            <form className="col s6 offset-s3" onSubmit={this.onSubmit}>
-              <div className="row">
-                <div className="input-field col s12">
-                  <input id="app-name-field" type="text" className={appNameClass}
-                         name="appName"
-                         value={appName}
-                         onChange={this.fieldChanged}
-                  />
-                  <label htmlFor="app-name-field">App name</label>
-                  <span className="helper-text" data-error={appNameError} data-success="" />
-                </div>
-                <div className="input-field col s12">
-                  <select value={region} name="region" onChange={this.fieldChanged}>
-                    <option value="" disabled>Choose a region</option>
-                    <option value="United States">United States</option>
-                    <option value="Europe">Europe</option>
-                  </select>
-                  <label>Region</label>
-                </div>
-                <button className="full-width btn waves-effect waves-light"
-                        type="submit"
-                        name="action"
-                        disabled={!isFormValid}
-                >
-                  Create app
-                </button>
-              </div>
-            </form>
-          </div>
 
+          <ul className="collapsible">
+            <li>
+              <div className="collapsible-header"><i className="material-icons">cloud_download</i>Connect an App</div>
+              <div className="collapsible-body">
+                {this.createConnectForm()}
+              </div>
+            </li>
+            <li>
+              <div className="collapsible-header"><i className="material-icons">cloud_upload</i>Deploy an App</div>
+              <div className="collapsible-body">
+                {this.createDeployForm()}
+              </div>
+            </li>
+          </ul>
         </div>
         <div className="modal-footer">
           <a href="#" className="modal-close waves-effect waves-light btn nav-red">Cancel</a>

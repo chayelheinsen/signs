@@ -15,5 +15,6 @@ FactoryBot.define do
   factory :user do
     email { Faker::Internet.email }
     password "password"
+    heroku_token { SecureRandom.uuid }
   end
 end

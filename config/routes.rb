@@ -13,6 +13,10 @@ Rails.application.routes.draw do
   resources :users, only: %i[new create]
 
   namespace :api do
-    resources :apps, only: %i[create update]
+    resources :apps, only: %i[create update] do
+      collection do
+        get "heroku"
+      end
+    end
   end
 end

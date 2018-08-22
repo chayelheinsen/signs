@@ -19,10 +19,12 @@
 //= require jquery
 //= require materialize
 //= require_tree .
+//= require_self
 
 $(document).ready(function(){
   $(".sidenav").sidenav();
   $(".dropdown-trigger").dropdown();
   $('.modal').modal();
   $('select').formSelect();
+  $('.collapsible').collapsible();
 });

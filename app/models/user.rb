@@ -12,7 +12,10 @@
 #
 
 class User < ApplicationRecord
+  include SecureField
+
   has_secure_password
+  has_secure_fields :heroku_token
 
   has_many :user_apps
   has_many :apps, through: :user_apps

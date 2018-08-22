@@ -2,6 +2,14 @@
 
 module API
   class AppsController < APIController
+    def index
+
+    end
+
+    def heroku
+      render json: heroku_account.apps
+    end
+
     def create
       result = CreateApp.call(app_params: app_params, current_user: current_user)
 
