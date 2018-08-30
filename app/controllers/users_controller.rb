@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
+  skip_before_action :require_user!
+
   def new; end
 
   def create

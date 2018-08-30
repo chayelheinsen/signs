@@ -17,12 +17,12 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -\
     && apt-get update \
     && apt-get install -y yarn
 
-# vim
-RUN apt-get update \
-    && apt-get install -y vim
-
-COPY package.json yarn.lock $HOME/
-RUN yarn
+## vim
+#RUN apt-get update \
+#    && apt-get install -y vim
+#
+#COPY package.json yarn.lock $HOME/
+#RUN yarn
 
 # Install the current project gems - they can be safely changed later
 # during development via `bundle install` or `bundle update`:

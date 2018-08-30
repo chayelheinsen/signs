@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class SessionsController < ApplicationController
+  skip_before_action :require_user!
+
   def new
     direct_to_dashboard if current_user
   end
