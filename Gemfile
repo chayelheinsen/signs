@@ -5,6 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "2.5.1"
 
+gem "activerecord-nulldb-adapter"
 gem "attr_encrypted", "~> 3.0.0"
 gem "axios_rails", "~> 0.7.0"
 gem "bcrypt", "~> 3.1.7"

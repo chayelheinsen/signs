@@ -30,3 +30,7 @@ ADD Gemfile* $HOME/
 RUN set -ex && bundle install
 
 ADD . $HOME
+
+RUN RAILS_ENV=production bundle exec rake assets:precompile
+
+CMD ["puma"]

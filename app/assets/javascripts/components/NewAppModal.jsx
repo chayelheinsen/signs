@@ -16,27 +16,12 @@ class NewAppModal extends React.Component {
   }
 
   componentDidMount() {
-    const { apiAuthToken } = this.props
-
-    const options = {
-      headers: {
-        "Authorization": `Bearer ${apiAuthToken}`
-      }
-    }
-
     remote.herokuApps().then((response) => {
       console.log(response)
       this.setState({ herokuApps: response.data })
     }).catch((error) => {
       console.log(error)
     })
-
-    // axios.get("/api/apps/heroku", options).then((response) => {
-    //   console.log(response)
-    //   this.setState({ herokuApps: response.data })
-    // }).catch((error) => {
-    //   console.log(error)
-    // })
   }
 
   createDeployForm() {
@@ -112,22 +97,8 @@ class NewAppModal extends React.Component {
     event.preventDefault()
 
     const { appName, region } = this.state
-    const { apiAuthToken } = this.props
 
-    const payload = {
-      app: {
-        name: appName,
-        region
-      }
-    }
-
-    const options = {
-      headers: {
-        "Authorization": `Bearer ${apiAuthToken}`
-      }
-    }
-
-    axios.post("/api/apps", payload, options).then(() => {
+    remote.createApp(appName, region).then(() => {
       window.location.replace("/dashboard")
     }).catch((error) => {
       const data = error.data.errors
@@ -165,18 +136,8 @@ class NewAppModal extends React.Component {
 
   chooseApp(event) {
     const appID = event.target.name
-    const options = {
-      headers: {
-        "Authorization": `Bearer ${apiAuthToken}`
-      }
-    }
-    const payload = {
-      app: {
-        id: appID
-      }
-    }
 
-    axios.post("/api/apps/connect", payload, options).then((response) = {
+    remote.connectHerokuApp(appID).then((response) = {
 
     }).catch((error) => {
 

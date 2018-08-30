@@ -2,12 +2,25 @@
 
 module API
   class AppsController < APIController
-    def index
-
-    end
+    def index; end
 
     def heroku
       render json: heroku_account.apps
+    end
+
+    def connect
+      heroku_app = heroku_account.app(connect_params[:id])
+
+      result = ConnectApp::Heroku.call(heroku_app: heroku_app, current_user: user)
+
+      if result.success?
+        render json: AppSerializer.new(
+          result.app,
+          params: { current_user_id: current_user.id },
+        ).serializable_hash
+      else
+        render_errors(result.errors)
+      end
     end
 
     def create
@@ -54,6 +67,10 @@ module API
 
     def app_update_params
       params.require(:app).permit(:name, :favorite)
+    end
+
+    def connect_params
+      params.require(:app).permit(:id)
     end
   end
 end

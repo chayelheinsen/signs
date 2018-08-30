@@ -39,7 +39,7 @@ class AppsList extends React.Component {
   }
 
   render() {
-    const { currentUser, apiAuthToken } = this.props
+    const { currentUser } = this.props
 
     return (
       <div className="apps-list-container">
@@ -48,7 +48,7 @@ class AppsList extends React.Component {
             {this.createNewButton()}
           </div>
         </div>
-        <NewAppModal currentUser={currentUser} apiAuthToken={apiAuthToken} />
+        <NewAppModal currentUser={currentUser} />
         {this.createAppList()}
       </div>
     )

@@ -8,11 +8,11 @@ volumes:
 
 services:
   postgres:
-    image: postgres:9.6.9
+    image: postgres:10.4
     volumes:
       - postgres-data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_PASSWORD: password
+#    environment:
+#      POSTGRES_PASSWORD: password
 
   redis:
     image: redis:latest
@@ -20,13 +20,14 @@ services:
   backend:
     build: .
     image: chayel/signs
-    command: rails server -b 0.0.0.0 -p 3000
+    # command: rails server -b 0.0.0.0 -p 3000
+    command: puma
     ports:
       - 3000:3000
     links:
       - postgres:db
       - redis
-    entrypoint: /usr/src/app/development-entrypoint
+    # entrypoint: /usr/src/app/development-entrypoint
     volumes:
       - .:/usr/src/app
       - app-gems:/usr/local/bundle
@@ -35,5 +36,6 @@ services:
     env_file:
       - '.env'
     environment:
-      DATABASE_URL: postgres://postgres:password@db:5432/my_app_development
+      # DATABASE_URL: postgres://postgres:password@db:5432/my_app_development
+      DATABASE_URL: postgres://postgres@db
       RAILS_LOG_TO_STDOUT: "true"

@@ -10,23 +10,14 @@ class AppForList extends React.Component {
 
   toggleFavorite(event) {
     const { app } = this.state
-    const { apiAuthToken } = this.props
     const update = !app.attributes.favorite
     app.attributes.favorite = update
 
     const payload = {
-      app: {
-        favorite: update
-      }
+      favorite: update
     }
 
-    const options = {
-      headers: {
-        "Authorization": `Bearer ${apiAuthToken}`
-      }
-    }
-
-    axios.patch(`/api/apps/${app.id}`, payload, options).then((response) => {
+    remote.updateApp(app.id, payload).then((response) => {
       console.log(response)
       this.setState({app})
     })

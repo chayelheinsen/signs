@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :apps, only: %i[create update] do
       collection do
         get "heroku"
+        post "connect"
       end
     end
   end
